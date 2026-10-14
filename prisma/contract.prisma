@@ -1,0 +1,26 @@
+// use prisma-8
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  image    String?
+  products Product[]
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  name        String
+  price       Float
+  image       String?
+  description String?
+  categoryId  Int?
+  category    Category? @relation(fields: [categoryId], references: [id])
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("cashier")
+  createdAt DateTime @default(now())
+}
